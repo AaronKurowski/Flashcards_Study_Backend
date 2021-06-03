@@ -24,6 +24,7 @@ class CollectionList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# gets collection by id
 class CollectionDetail(APIView):
 
     def get_collection(self, pk):
@@ -40,8 +41,8 @@ class CollectionDetail(APIView):
 
 class FlashcardList(APIView):
 
-    def get(self, request, fk):
-        flashcard = Flashcard.objects.all(collection=fk)
+    def get(self, request, pk):
+        flashcard = Flashcard.objects.filter(collection=pk)
         serializer = FlashcardSerializer(flashcard, many=True)
         return Response(serializer.data)
 
