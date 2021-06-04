@@ -38,6 +38,11 @@ class CollectionDetail(APIView):
         serializer = CollectionSerializer(collection)
         return Response(serializer.data)
 
+    def delete(self, request, collection_id):
+        collection = self.get_collection(collection_id)
+        collection.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class FlashcardList(APIView):
 
